@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>React Counter</title>
+
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/babel.min.js"></script>
+
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/slideshow.css">
+
+</head>
+
+<body>
+
+<div id="app"></div>
+
+<script type="text/babel">
+    const slides = [
+            '../images/image1.jpg',
+            '../images/image2.jpg',
+            '../images/image3.jpg',
+            '../images/image4.jpg'
+        ],
+        numSlides = slides.length;
+
+    var Counter = React.createClass({
+        getInitialState() {
+            return {
+                title: 'React Slideshow',
+                activeSlide: 0
+            }
+        },
+        pickSlide(i) {
+            this.setState({activeSlide: i});
+        },
+        forwardSlide() {
+            this.setState({activeSlide:
+            (this.state.activeSlide+1) % numSlides})
+        },
+        backSlide() {
+            this.setState({activeSlide:
+            (this.state.activeSlide-1+numSlides) % numSlides})
+        },
+        render() {
+            const {title, activeSlide} = this.state;
+
+            return (
+                    <div>
+                        <h1 className="app-title">{ title }</h1>
+                        <div className="app-timer">
+                            <div className="slideshow-container">
+                                <div className="">
+                                    <div className="numbertext"> {activeSlide+1} / {numSlides}</div>
+                                    <img src={slides[activeSlide]} style={{width:"100%"}} />
+                                </div>
+                                <a className="prev" onClick={this.backSlide}>&#10094;</a>
+                                <a className="next" onClick={this.forwardSlide}>&#10095;</a>
+                            </div>
+                            <br />
+                            <div style={{textAlign:"center"}}>
+                                {slides.map((slide, idx)=> (
+                                                <span className="dot" key={idx}
+                                                      onClick={() => this.pickSlide(idx)}>
+                                        </span>
+                                    )
+                                )}
+                            </div>
+                        </div>
+                    </div>
+            );
+        }
+    });
+
+    ReactDOM.render(<Counter />, document.getElementById('app'));
+
+</script>
+
+</body>
+</html>

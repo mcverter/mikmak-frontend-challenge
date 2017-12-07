@@ -17,7 +17,7 @@ body {
   padding: 12px 24px;
 }
 
-.app-counter-buttons {
+.app-fibonacci-buttons, .app-stopwatch-buttons, .app-counter-buttons {
   margin: 24px;
 }
 
@@ -26,4 +26,18 @@ body {
   margin: 0 8px;
   -webkit-appearance: none;
   width: 60px;
+}
+
+.app-stopwatch-buttons button {
+  font-size: 24px;
+  margin: 0 8px;
+  -webkit-appearance: none;
+  width: 80px;
+}
+
+.app-fibonacci-buttons button {
+  font-size: 24px;
+  margin: 0 8px;
+  -webkit-appearance: none;
+  width: 100px;
 }

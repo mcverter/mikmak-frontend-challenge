@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>React Counter</title>
+
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/babel.min.js"></script>
+
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body>
+
+<div id="app"></div>
+
+<script type="text/babel">
+    var Counter = React.createClass({
+        getInitialState() {
+            return {
+                seconds: 0,
+                title: 'React Counter',
+                timer : undefined
+            }
+        },
+        toggleTimer() {
+            if(!this.state.timer) {
+                this.setState({
+                    timer: setInterval(() => {
+                        this.setState({
+                            seconds: this.state.seconds + 1
+                        })
+                    }, 1000)})
+            } else {
+                clearInterval(this.state.timer);
+                this.setState({
+                    timer: undefined
+                })
+            }
+        },
+        reset() {
+            this.setState({
+                seconds: 0,
+                timer: undefined
+            })
+        },
+        render() {
+            return (
+                    <div>
+                        <h1 className="app-title">{ this.state.title }</h1>
+                        <div className="app-current-count">
+                            {('0' +  Math.floor(this.state.seconds/3600)).slice(-2)}
+                            :
+                            {('0' +  (Math.floor(this.state.seconds/60) % 60)).slice(-2)}
+                            :
+                            {('0' +  this.state.seconds % 60).slice(-2)}
+                        </div>
+                        <div className="app-stopwatch-buttons">
+                            <button type="button" name="start" onClick={this.toggleTimer}>
+                                {this.state.timer ? "Stop" : "Start"}
+                            </button>
+                            <button type="button" name="reset" onClick={this.reset}>Reset</button>
+                        </div>
+                    </div>
+            );
+        }
+    });
+
+    ReactDOM.render(<Counter />, document.getElementById('app'));
+
+</script>
+
+</body>
+</html>
