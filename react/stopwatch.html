@@ -47,19 +47,20 @@
             })
         },
         render() {
+            const {title, seconds, timer} = this.state;
             return (
                     <div>
-                        <h1 className="app-title">{ this.state.title }</h1>
+                        <h1 className="app-title">{ title }</h1>
                         <div className="app-current-count">
-                            {('0' +  Math.floor(this.state.seconds/3600)).slice(-2)}
+                            {('0' +  Math.floor(seconds/3600)).slice(-2)}
                             :
-                            {('0' +  (Math.floor(this.state.seconds/60) % 60)).slice(-2)}
+                            {('0' +  (Math.floor(seconds/60) % 60)).slice(-2)}
                             :
-                            {('0' +  this.state.seconds % 60).slice(-2)}
+                            {('0' +  seconds % 60).slice(-2)}
                         </div>
                         <div className="app-stopwatch-buttons">
                             <button type="button" name="start" onClick={this.toggleTimer}>
-                                {this.state.timer ? "Stop" : "Start"}
+                                {timer ? "Stop" : "Start"}
                             </button>
                             <button type="button" name="reset" onClick={this.reset}>Reset</button>
                         </div>
